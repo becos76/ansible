@@ -1,0 +1,17 @@
+---
+- hosts: routers, switches
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vault.yml
+  vars:
+    cli:
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: RUN 'Execute Commands'
+      ios_command:
+        commands: show version 
+        provider: "{{ cli }}"
+        register: cmd
+    - debug: var=cmd.stdout_lines

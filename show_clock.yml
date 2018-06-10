@@ -1,0 +1,23 @@
+---
+- hosts: routers, switches
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: Include Credentials
+    include_vars: secrets.yml
+
+  - name: Define Provider
+    set_fact:
+      provider:
+         host: "{{ ansible_host }}"
+         username: "{{ creds['username'] }}"
+         password: "{{ creds['password'] }}"
+
+  - name: RUN 'Execute Commands'
+    ios_command:
+       provider: "{{ provider }}"
+       commands:
+           - show version | i time
+    register: cmd
+  - debug: var=cmd.stdout_lines
