@@ -1,0 +1,11 @@
+[all:vars]
+ansible_connection=local
+username=cisco
+password=cisco123
+
+[routers]
+rtr host=10.10.1.254
+
+[switches]
+sw1 host=10.10.1.2
+

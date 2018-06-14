@@ -1,0 +1,11 @@
+---
+- name: Get Config
+  hosts: routers, switches
+  vars:
+    creds:
+      host: "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - ios_facts:
+         provider: "{{ creds }}"
